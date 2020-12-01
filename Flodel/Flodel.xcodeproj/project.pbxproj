@@ -15,6 +15,7 @@
 		2C5EE1C62576638D0055DD57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5EE1C42576638D0055DD57 /* LaunchScreen.storyboard */; };
 		2C5EE1D12576638D0055DD57 /* FlodelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1D02576638D0055DD57 /* FlodelTests.swift */; };
 		2C5EE1DC2576638D0055DD57 /* FlodelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */; };
+		2C5EE1EE257663F80055DD57 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1ED257663F80055DD57 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		2C5EE1D72576638D0055DD57 /* FlodelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlodelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlodelUITests.swift; sourceTree = "<group>"; };
 		2C5EE1DD2576638D0055DD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C5EE1ED257663F80055DD57 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		2C5EE1B8257663880055DD57 /* Flodel */ = {
 			isa = PBXGroup;
 			children = (
+				2C5EE1EC257663C80055DD57 /* Utilites */,
 				2C5EE1B9257663880055DD57 /* AppDelegate.swift */,
 				2C5EE1BB257663880055DD57 /* SceneDelegate.swift */,
 				2C5EE1BD257663880055DD57 /* ViewController.swift */,
@@ -126,6 +129,14 @@
 				2C5EE1DD2576638D0055DD57 /* Info.plist */,
 			);
 			path = FlodelUITests;
+			sourceTree = "<group>";
+		};
+		2C5EE1EC257663C80055DD57 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EE1ED257663F80055DD57 /* Router.swift */,
+			);
+			path = Utilites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5EE1EE257663F80055DD57 /* Router.swift in Sources */,
 				2C5EE1BE257663880055DD57 /* ViewController.swift in Sources */,
 				2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */,
 				2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */,
