@@ -24,6 +24,7 @@
 		2C5EE2192577D7110055DD57 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE2182577D7110055DD57 /* Image.swift */; };
 		2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE22125780D640055DD57 /* PhotoViewController.swift */; };
 		2C5EE22A25780E1C0055DD57 /* ExplorerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */; };
+		2C5EE23225780FE80055DD57 /* ExplorerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE23125780FE80055DD57 /* ExplorerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		2C5EE2182577D7110055DD57 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2C5EE22125780D640055DD57 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerTableViewController.swift; sourceTree = "<group>"; };
+		2C5EE23125780FE80055DD57 /* ExplorerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			children = (
 				2C5EE22125780D640055DD57 /* PhotoViewController.swift */,
 				2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */,
+				2C5EE23125780FE80055DD57 /* ExplorerCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				2C5EE1F5257668BD0055DD57 /* PhotoRouter.swift in Sources */,
 				2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */,
 				2C5EE22A25780E1C0055DD57 /* ExplorerTableViewController.swift in Sources */,
+				2C5EE23225780FE80055DD57 /* ExplorerCell.swift in Sources */,
 				2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */,
 				2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */,
 				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
