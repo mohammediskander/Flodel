@@ -157,6 +157,7 @@
                                     <outlet property="cellImage" destination="YY2-cr-Vgm" id="7L5-bj-ynd"/>
                                     <outlet property="photoDetails" destination="6Yo-Jy-YeI" id="xLN-Y9-Czj"/>
                                     <outlet property="spinner" destination="niv-MR-8bY" id="u8H-Fh-yyt"/>
+                                    <segue destination="LEb-QO-533" kind="show" id="wGb-a7-4Cy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -169,6 +170,117 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAG-na-tVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2414.4927536231885" y="2439.84375"/>
+        </scene>
+        <!--Photo Details View Controller-->
+        <scene sceneID="A9k-Wy-D3Y">
+            <objects>
+                <viewController id="LEb-QO-533" customClass="PhotoDetailsViewController" customModule="Flodel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fgj-nz-bcy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DLV-hv-39H">
+                                <rect key="frame" x="15" y="20" width="384" height="384"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="384" id="dP7-Dd-HTm"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ovW-y6-HJp">
+                                <rect key="frame" x="15" y="415.5" width="25" height="22.5"/>
+                                <color key="tintColor" name="Red Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="JEk-u2-Xdq"/>
+                                    <constraint firstAttribute="height" constant="25" id="drg-NB-Oja"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TV-Wy-Dbn">
+                                <rect key="frame" x="348.5" y="416" width="50.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cue-Hc-wjq">
+                                <rect key="frame" x="15" y="449" width="384" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhW-qC-GmQ">
+                                <rect key="frame" x="15" y="480" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpN-h5-nlK">
+                                <rect key="frame" x="0.0" y="511" width="414" height="331"/>
+                                <connections>
+                                    <segue destination="zJ3-cm-kbG" kind="embed" id="9ri-VA-PD3"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofo-6p-ajF">
+                                <rect key="frame" x="45" y="416" width="42.5" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" name="Red Color"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JCT-Px-4HQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cue-Hc-wjq" firstAttribute="leading" secondItem="JCT-Px-4HQ" secondAttribute="leading" constant="15" id="3Rg-rM-2ml"/>
+                            <constraint firstItem="hpN-h5-nlK" firstAttribute="trailing" secondItem="JCT-Px-4HQ" secondAttribute="trailing" id="6dd-zl-coc"/>
+                            <constraint firstItem="ovW-y6-HJp" firstAttribute="top" secondItem="DLV-hv-39H" secondAttribute="bottom" constant="10" id="8jO-2u-mzG"/>
+                            <constraint firstItem="ovW-y6-HJp" firstAttribute="leading" secondItem="JCT-Px-4HQ" secondAttribute="leading" constant="15" id="G3b-gv-o2A"/>
+                            <constraint firstItem="zhW-qC-GmQ" firstAttribute="leading" secondItem="JCT-Px-4HQ" secondAttribute="leading" constant="15" id="Khe-CF-Hkq"/>
+                            <constraint firstAttribute="bottom" secondItem="hpN-h5-nlK" secondAttribute="bottom" id="L4q-Ix-iep"/>
+                            <constraint firstItem="cue-Hc-wjq" firstAttribute="top" secondItem="ovW-y6-HJp" secondAttribute="bottom" constant="10" id="MyN-vW-9Kh"/>
+                            <constraint firstItem="hpN-h5-nlK" firstAttribute="top" secondItem="zhW-qC-GmQ" secondAttribute="bottom" constant="10" id="PuK-07-81i"/>
+                            <constraint firstItem="ofo-6p-ajF" firstAttribute="leading" secondItem="ovW-y6-HJp" secondAttribute="trailing" constant="5" id="Riu-M6-avd"/>
+                            <constraint firstItem="JCT-Px-4HQ" firstAttribute="trailing" secondItem="cue-Hc-wjq" secondAttribute="trailing" constant="15" id="bsg-sm-zMM"/>
+                            <constraint firstItem="3TV-Wy-Dbn" firstAttribute="centerY" secondItem="ofo-6p-ajF" secondAttribute="centerY" id="cbp-k8-KfD"/>
+                            <constraint firstItem="DLV-hv-39H" firstAttribute="leading" secondItem="JCT-Px-4HQ" secondAttribute="leading" constant="15" id="cgQ-Dr-2EW"/>
+                            <constraint firstItem="zhW-qC-GmQ" firstAttribute="top" secondItem="cue-Hc-wjq" secondAttribute="bottom" constant="10" id="gIi-0S-jBZ"/>
+                            <constraint firstItem="JCT-Px-4HQ" firstAttribute="trailing" secondItem="DLV-hv-39H" secondAttribute="trailing" constant="15" id="i2A-WK-ED0"/>
+                            <constraint firstItem="hpN-h5-nlK" firstAttribute="leading" secondItem="JCT-Px-4HQ" secondAttribute="leading" id="igf-Bz-M3z"/>
+                            <constraint firstItem="JCT-Px-4HQ" firstAttribute="trailing" secondItem="3TV-Wy-Dbn" secondAttribute="trailing" constant="15" id="qDW-co-J19"/>
+                            <constraint firstItem="DLV-hv-39H" firstAttribute="top" secondItem="JCT-Px-4HQ" secondAttribute="top" constant="20" id="tk4-yq-FeL"/>
+                            <constraint firstItem="ofo-6p-ajF" firstAttribute="centerY" secondItem="ovW-y6-HJp" secondAttribute="centerY" id="zMA-fd-yjR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LgG-cz-1nV"/>
+                    <size key="freeformSize" width="414" height="896"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b2b-4V-nzr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1630.4347826086957" y="2440.8482142857142"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="tKN-Wk-Hd6">
+            <objects>
+                <tableViewController id="zJ3-cm-kbG" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dgy-II-y9V">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="331"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XQn-gi-IVc">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XQn-gi-IVc" id="njH-ax-e3V">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zJ3-cm-kbG" id="uct-m6-fkO"/>
+                            <outlet property="delegate" destination="zJ3-cm-kbG" id="Oju-nH-5t3"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lsB-FQ-Eiv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-861" y="2630"/>
         </scene>
         <!--Chat-->
         <scene sceneID="hdm-Hq-faa">
@@ -264,6 +376,7 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
@@ -271,6 +384,9 @@
         <image name="square.split.1x2.fill" catalog="system" width="128" height="114"/>
         <namedColor name="Primary Color">
             <color red="0.0039215686274509803" green="0.68235294117647061" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red Color">
+            <color red="0.83529411764705885" green="0.20784313725490194" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
