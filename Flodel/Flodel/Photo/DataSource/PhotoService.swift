@@ -150,6 +150,41 @@ class PhotoService: NSObject {
     }
 }
 
+extension PhotoService: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.photos.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "explorerPhoto") as? ExplorerCell
+        
+        cell?.photo = self.photos[indexPath.section]
+        cell?.update(displaying: nil)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.fetchImage(for: self.photos[indexPath.section]) {
+                (result) -> Void in
+                
+                guard case let .success(image) = result else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    cell?.update(displaying: image)
+                }
+            }
+        }
+        
+        return cell!
+    }
+    
+    
+}
+
 struct PhotosResponse: Codable {
     let photosInfo: FlickrPhotosResponse
     
