@@ -16,6 +16,10 @@
 		2C5EE1D12576638D0055DD57 /* FlodelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1D02576638D0055DD57 /* FlodelTests.swift */; };
 		2C5EE1DC2576638D0055DD57 /* FlodelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */; };
 		2C5EE1EE257663F80055DD57 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1ED257663F80055DD57 /* Router.swift */; };
+		2C5EE1F5257668BD0055DD57 /* PhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */; };
+		2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */; };
+		2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE2052577CA790055DD57 /* URLRequest+QueryItems.swift */; };
+		2C5EE20B2577CF640055DD57 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE20A2577CF640055DD57 /* PhotoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlodelUITests.swift; sourceTree = "<group>"; };
 		2C5EE1DD2576638D0055DD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5EE1ED257663F80055DD57 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRouter.swift; sourceTree = "<group>"; };
+		2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+URLComponents.swift"; sourceTree = "<group>"; };
+		2C5EE2052577CA790055DD57 /* URLRequest+QueryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+QueryItems.swift"; sourceTree = "<group>"; };
+		2C5EE20A2577CF640055DD57 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,8 @@
 		2C5EE1B8257663880055DD57 /* Flodel */ = {
 			isa = PBXGroup;
 			children = (
+				2C5EE1FC2577C72D0055DD57 /* Extensions */,
+				2C5EE1F2257668910055DD57 /* Photo */,
 				2C5EE1EC257663C80055DD57 /* Utilites */,
 				2C5EE1B9257663880055DD57 /* AppDelegate.swift */,
 				2C5EE1BB257663880055DD57 /* SceneDelegate.swift */,
@@ -137,6 +147,32 @@
 				2C5EE1ED257663F80055DD57 /* Router.swift */,
 			);
 			path = Utilites;
+			sourceTree = "<group>";
+		};
+		2C5EE1F2257668910055DD57 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EE1F3257668A70055DD57 /* DataSource */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		2C5EE1F3257668A70055DD57 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */,
+				2C5EE20A2577CF640055DD57 /* PhotoService.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		2C5EE1FC2577C72D0055DD57 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */,
+				2C5EE2052577CA790055DD57 /* URLRequest+QueryItems.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,10 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5EE20B2577CF640055DD57 /* PhotoService.swift in Sources */,
 				2C5EE1EE257663F80055DD57 /* Router.swift in Sources */,
 				2C5EE1BE257663880055DD57 /* ViewController.swift in Sources */,
+				2C5EE1F5257668BD0055DD57 /* PhotoRouter.swift in Sources */,
 				2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */,
 				2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */,
+				2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */,
+				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
