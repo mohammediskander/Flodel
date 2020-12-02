@@ -22,6 +22,7 @@
 		2C5EE20B2577CF640055DD57 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE20A2577CF640055DD57 /* PhotoService.swift */; };
 		2C5EE2112577D2EC0055DD57 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE2102577D2EC0055DD57 /* Photo.swift */; };
 		2C5EE2192577D7110055DD57 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE2182577D7110055DD57 /* Image.swift */; };
+		2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE22125780D640055DD57 /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		2C5EE20A2577CF640055DD57 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		2C5EE2102577D2EC0055DD57 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2C5EE2182577D7110055DD57 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		2C5EE22125780D640055DD57 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		2C5EE1F2257668910055DD57 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
+				2C5EE22025780D390055DD57 /* Views */,
 				2C5EE20F2577D2DE0055DD57 /* Models */,
 				2C5EE1F3257668A70055DD57 /* DataSource */,
 			);
@@ -187,6 +190,14 @@
 				2C5EE2182577D7110055DD57 /* Image.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2C5EE22025780D390055DD57 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EE22125780D640055DD57 /* PhotoViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +340,7 @@
 				2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */,
 				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
 				2C5EE2192577D7110055DD57 /* Image.swift in Sources */,
+				2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
