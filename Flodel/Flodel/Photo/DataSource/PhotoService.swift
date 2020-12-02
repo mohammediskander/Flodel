@@ -14,12 +14,16 @@ protocol PhotoServiceDelegate: AnyObject {
 enum PhotoError: Error {
     case imageCreationError
     case missingImageURL
+    case missingPhotoID
 }
 
 class PhotoService: NSObject {
     
+    private let imageStore = ImageStore()
+    
     weak var delegate: PhotoServiceDelegate?
     typealias PhotoResult = Result<[Photo], Error>
+    typealias ImageResult = Result<UIImage, Error>
     
     var photos: [Photo] = [] {
         didSet {
@@ -69,6 +73,8 @@ class PhotoService: NSObject {
                     completion(result)
                 }
             }
+            
+            task.resume()
         } catch {
             print("ERR::\(error)")
         }
@@ -93,6 +99,54 @@ class PhotoService: NSObject {
             print("ERR::\(error)")
             return .failure(error)
         }
+    }
+    
+    func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
+        guard let photoKey = photo._id else {
+            completion(.failure(PhotoError.missingPhotoID))
+            return
+        }
+        
+        if let image = imageStore.image(forKey: photoKey) {
+            OperationQueue.main.addOperation {
+                completion(.success(image))
+            }
+        }
+        
+        guard let photoURL = photo.remoteURL else {
+            completion(.failure(PhotoError.missingImageURL))
+            return
+        }
+        
+        let request = URLRequest(url: photoURL)
+        
+        let task = session.dataTask(with: request) {
+            data, repsonse, error in
+            
+            let result = self.processImageRequest(data: data, error: error)
+            
+            if case let .success(image) = result {
+                self.imageStore.setImage(image, forKey: photoKey)
+            }
+            
+            OperationQueue.main.addOperation {
+                completion(result)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func processImageRequest(data: Data?, error: Error?) -> ImageResult {
+        guard let imageData = data, let image = UIImage(data: imageData) else {
+            if data == nil {
+                return .failure(error!)
+            } else {
+                return .failure(PhotoError.imageCreationError)
+            }
+        }
+        
+        return .success(image)
     }
 }
 
