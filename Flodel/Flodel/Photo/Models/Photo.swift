@@ -6,14 +6,16 @@
 //
 
 import Foundation
+import MapKit
+import CoreLocation
 
-class Photo: Equatable, Codable {
+class Photo: NSObject, Codable {
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         return lhs._id == rhs._id
     }
     
     let _id: String?
-    let title: String
+    let title: String?
     let remoteURL: URL?
     let dateTaken: Date
     let latitude: String
@@ -61,4 +63,12 @@ class Photo: Equatable, Codable {
     private static func toRadius(from: Double, to: Double) -> Double {
         return self.toRadius(to - from)
     }
+}
+
+extension Photo: MKAnnotation {
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: Double(self.latitude)!, longitude: Double(longitude)!)
+    }
+    
+    
 }

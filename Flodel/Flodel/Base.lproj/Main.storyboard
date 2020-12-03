@@ -102,10 +102,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Riyadh" leftItemsSupplementBackButton="YES" id="h30-wp-W2r">
                         <barButtonItem key="backBarButtonItem" title="Explore" id="ZYT-sU-nhB"/>
-                        <barButtonItem key="rightBarButtonItem" image="message.fill" catalog="system" id="3wM-7T-vgS">
+                        <barButtonItem key="rightBarButtonItem" image="map.fill" catalog="system" id="3wM-7T-vgS">
                             <color key="tintColor" name="Primary Color"/>
                             <connections>
-                                <segue destination="47L-22-sEg" kind="show" id="FWt-Ke-Joz"/>
+                                <segue destination="B6S-Ia-Q05" kind="show" identifier="showPhotoMapViewController" id="hbq-j2-BEZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -113,6 +113,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwo-o4-2DU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2414.4927536231885" y="1733.7053571428571"/>
+        </scene>
+        <!--Photo Map View Controller-->
+        <scene sceneID="RkZ-Lg-q9g">
+            <objects>
+                <viewController id="B6S-Ia-Q05" customClass="PhotoMapViewController" customModule="Flodel" customModuleProvider="target" sceneMemberID="viewController">
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="ntR-eb-2ve">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </mapView>
+                    <navigationItem key="navigationItem" id="tNZ-2W-9eA"/>
+                    <connections>
+                        <outlet property="mapView" destination="ntR-eb-2ve" id="1v9-9p-LNp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96n-ke-dZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1629" y="1734"/>
         </scene>
         <!--Explorer Table View Controller-->
         <scene sceneID="0eU-1i-en4">
@@ -302,35 +319,6 @@
             </objects>
             <point key="canvasLocation" x="-861" y="2630"/>
         </scene>
-        <!--Chat-->
-        <scene sceneID="hdm-Hq-faa">
-            <objects>
-                <tableViewController id="47L-22-sEg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XGK-4e-XeG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Byu-Z8-eO3">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Byu-Z8-eO3" id="Ddk-Kf-xhR">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="47L-22-sEg" id="A7A-gK-pss"/>
-                            <outlet property="delegate" destination="47L-22-sEg" id="3Yq-GW-CH9"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Chat" id="EWA-Hm-CLY"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EZN-il-nUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1629" y="1734"/>
-        </scene>
         <!--Camera-->
         <scene sceneID="Joo-3N-GyI">
             <objects>
@@ -397,7 +385,7 @@
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
-        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="square.split.1x2" catalog="system" width="128" height="114"/>
