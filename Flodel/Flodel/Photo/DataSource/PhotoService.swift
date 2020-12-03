@@ -44,9 +44,9 @@ class PhotoService: NSObject {
         self.fetchPhotos()
     }
     
-    func fetchPhotos() {
-        let latitude = UserDefaults.standard.double(forKey: "user.currentLocaiton.latitude")
-        let longitude = UserDefaults.standard.double(forKey: "user.currentLocaiton.longitude")
+    func fetchPhotos(_ completion: @escaping () -> Void = { }) {
+        let latitude = UserDefaults.standard.double(forKey: "user.currentLocation.latitude")
+        let longitude = UserDefaults.standard.double(forKey: "user.currentLocation.longitude")
         
         self.getPhotos(at: (latitude: latitude, longitude: longitude)) {
             result in
@@ -54,6 +54,7 @@ class PhotoService: NSObject {
             switch result {
             case let .success(photos):
                 self.photos = photos.sorted(by: { lhs, rhs -> Bool in lhs.distance < rhs.distance })
+                completion()
             case let .failure(error):
                 print("ERR::\(error)")
             }
@@ -85,8 +86,9 @@ class PhotoService: NSObject {
             let decoder = JSONDecoder()
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-DD HH:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
@@ -137,7 +139,7 @@ class PhotoService: NSObject {
         task.resume()
     }
     
-    func processImageRequest(data: Data?, error: Error?) -> ImageResult {
+    private func processImageRequest(data: Data?, error: Error?) -> ImageResult {
         guard let imageData = data, let image = UIImage(data: imageData) else {
             if data == nil {
                 return .failure(error!)
@@ -163,8 +165,8 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "explorerPhoto") as? ExplorerCell
         
         cell?.photo = self.photos[indexPath.section]
-        cell?.update(displaying: nil)
         
+        // TODO: Found a way to give the current viewd cell(s) a higher priority than the others
         DispatchQueue.global(qos: .background).async {
             self.fetchImage(for: self.photos[indexPath.section]) {
                 (result) -> Void in
@@ -173,16 +175,17 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    cell?.update(displaying: image)
+                // first check if the current cell is the viewing list..
+                if ((tableView.indexPathsForVisibleRows?.contains(indexPath)) != nil) {
+                    DispatchQueue.main.async {
+                        cell?.update(displaying: image)
+                    }
                 }
             }
         }
         
         return cell!
     }
-    
-    
 }
 
 struct PhotosResponse: Codable {

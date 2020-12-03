@@ -157,7 +157,7 @@
                                     <outlet property="cellImage" destination="YY2-cr-Vgm" id="7L5-bj-ynd"/>
                                     <outlet property="photoDetails" destination="6Yo-Jy-YeI" id="xLN-Y9-Czj"/>
                                     <outlet property="spinner" destination="niv-MR-8bY" id="u8H-Fh-yyt"/>
-                                    <segue destination="LEb-QO-533" kind="show" id="wGb-a7-4Cy"/>
+                                    <segue destination="LEb-QO-533" kind="show" identifier="showPhotoDetails" id="wGb-a7-4Cy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -166,6 +166,21 @@
                             <outlet property="delegate" destination="DpT-Yy-RBu" id="YIH-q9-48W"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="sGQ-bZ-RGQ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Refreshing">
+                                <attributes>
+                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <font key="NSFont" metaFont="toolTip"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <connections>
+                            <action selector="handleTableViewRefreshRequest:" destination="DpT-Yy-RBu" eventType="valueChanged" id="SAa-38-boS"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAG-na-tVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -249,6 +264,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="LgG-cz-1nV"/>
                     <size key="freeformSize" width="414" height="896"/>
+                    <connections>
+                        <outlet property="detailsLabel" destination="3TV-Wy-Dbn" id="n9y-F3-JWO"/>
+                        <outlet property="likesCountLabel" destination="ofo-6p-ajF" id="CBw-3e-hMc"/>
+                        <outlet property="photoView" destination="DLV-hv-39H" id="BeP-B9-XZi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2b-4V-nzr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

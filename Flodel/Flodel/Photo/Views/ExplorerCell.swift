@@ -19,6 +19,7 @@ class ExplorerCell: UITableViewCell {
     }
     
     func configureCell() {
+        update(displaying: nil)
         var distance: String?
         if photo.distance > 1 {
             distance = "\(Int(photo.distance.rounded()))km"
