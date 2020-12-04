@@ -12,6 +12,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var mapView: MKMapView!
     
     var photoService: PhotoService!
+    var photosAnnotations: [PhotoAnnotation]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,83 +20,59 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
         mapView.showsScale = true
         mapView.delegate = self
         mapView.showsUserLocation = true
-//        mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
-        showPhotosOnMap()
-        print(mapView.annotations.count)
+        
+        showAnnotations()
+        print("Annotations on map: \(mapView.annotations.count)")
     }
     
-    func showPhotosOnMap() {
+    
+    
+    func showAnnotations() {
         self.photoService.photos.forEach {
             photo in
+//            mapView.addAnnotation(photo)
+            let photoAnnotation = PhotoAnnotation()
+            photoAnnotation.title = photo.title
+            photoAnnotation.coordinate = photo.coordinate
+//            photoAnnotation.image = UIImage(systemName: "mappin")
             
-//            let photoAnnotation = CustomAnnotation()
-//            photoAnnotation.coordinate = photo.coordinate
-//            photoAnnotation.title = photo.title
+            photoService.fetchImage(for: photo) {
+                [weak photoAnnotation] result in
+                
+                guard case let .success(image) = result else { return }
+                guard let photoAnnotation = photoAnnotation else { return }
+                
+                print("Current thread is main: \(Thread.current == Thread.main)")
+                photoAnnotation.image = image
+            }
             
-            
-//            let photoAnnotation = MKAnnotationView
-//            let lat = Double(photo.latitude)
-//            let long =
-//            let annotation = Station(latitude: lat, longitude: long)
-//            annotation.title = item.valueForKey("title") as? String
-//            annotations.append(photo)
-        
-//            let pointAnnotation = CustomAnnotation()
-//            pointAnnotation.pinCustomImage = nil
-//
-//            photoService.fetchImage(for: photo) {
-//                [weak photoAnnotation, weak photo] result in
-//
-//                print("is main thread? \(Thread.current == Thread.main)")
-//                guard let photoAnnotation = photoAnnotation else { return }
-//
-//                switch result {
-//                case let .success(image):
-//                    photoAnnotation.pinCustomImage = image
-//                case let .failure(error):
-//                    print("ERR::Failed to load an image with id \(String(describing: photo?._id))", error)
-//                    break
-//                }
-//            }
-//
-//            let pinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//            mapView.addAnnotation(pinAnnotationView.annotation!)
-//            mapView.addAnnotation(photoAnnotation)
-            mapView.addAnnotation(photo)
+            let pinAnnotationView = MKPinAnnotationView(annotation: photoAnnotation, reuseIdentifier: "photoAnnotation")
+            self.mapView.addAnnotation(pinAnnotationView.annotation!)
         }
     }
-}
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseIdentifier = "photoAnnotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
 
-class CustomAnnotation: MKPointAnnotation {
-    var pinCustomImage: UIImage!
-}
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        annotationView?.layer.cornerRadius = 12.5
+        annotationView?.layer.masksToBounds = true
+        annotationView?.displayPriority = .defaultHigh
+        annotationView?.translatesAutoresizingMaskIntoConstraints = false
+        annotationView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        annotationView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
 
-class CustomAnnotationView: MKAnnotationView {
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        canShowCallout = true
-//        update(for: annotation)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        self.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        
-        self.layer.cornerRadius = 45 / 2
-//        self.layer.
-        
-        let imageView = UIImageView()
-        imageView.image = (annotation as? CustomAnnotation)?.pinCustomImage
-        self.addSubview(imageView)
+        if let customPointAnnotation = annotation as? PhotoAnnotation {
+            annotationView?.image = customPointAnnotation.image
+        }
+
+        return annotationView
     }
-
-//    override var annotation: MKAnnotation?
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-//    private func update(for annotation: MKAnnotation?) {
-//        image = (annotation as? CustomAnnotation)?.pinCustomImage
-//    }
 }

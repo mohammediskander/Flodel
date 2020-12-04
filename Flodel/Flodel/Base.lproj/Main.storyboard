@@ -285,6 +285,7 @@
                         <outlet property="detailsLabel" destination="3TV-Wy-Dbn" id="n9y-F3-JWO"/>
                         <outlet property="likesCountLabel" destination="ofo-6p-ajF" id="CBw-3e-hMc"/>
                         <outlet property="photoView" destination="DLV-hv-39H" id="BeP-B9-XZi"/>
+                        <outlet property="titleLabel" destination="cue-Hc-wjq" id="txS-QN-s3w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2b-4V-nzr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

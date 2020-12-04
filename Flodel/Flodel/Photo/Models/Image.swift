@@ -23,6 +23,9 @@ class ImageStore {
     }
     
     func image(forKey key: String) -> UIImage? {
+        
+        print("image for key \(key) is exist? \(cache.object(forKey: key as NSString) != nil)")
+        
         if let existingImage = cache.object(forKey: key as NSString) {
             return existingImage
         }

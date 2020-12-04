@@ -12,6 +12,7 @@ class PhotoDetailsViewController: UIViewController {
     @IBOutlet var photoView: UIImageView!
     @IBOutlet var likesCountLabel: UILabel!
     @IBOutlet var detailsLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     var photo: Photo!
     var photoService: PhotoService!
@@ -31,6 +32,7 @@ class PhotoDetailsViewController: UIViewController {
             distance = "\(Int((photo.distance * 1000).rounded()))m"
         }
         self.detailsLabel.text = "\(photo.dateTaken.fromNow()), \(distance)"
+        self.titleLabel.text = photo.title?.isEmpty ?? true ? "<<unkown>>" : photo.title
         self.photoService.fetchImage(for: photo) {
             [weak self] result in
             

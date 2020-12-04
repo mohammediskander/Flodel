@@ -25,6 +25,9 @@
 		2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE22125780D640055DD57 /* PhotoViewController.swift */; };
 		2C5EE22A25780E1C0055DD57 /* ExplorerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */; };
 		2C5EE23225780FE80055DD57 /* ExplorerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE23125780FE80055DD57 /* ExplorerCell.swift */; };
+		2C5EE23725781A400055DD57 /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE23625781A400055DD57 /* PhotoDetailsViewController.swift */; };
+		2C5EE242257887B00055DD57 /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE241257887B00055DD57 /* PhotoMapViewController.swift */; };
+		2C5EE247257965AD0055DD57 /* PhotoAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE246257965AC0055DD57 /* PhotoAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		2C5EE22125780D640055DD57 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerTableViewController.swift; sourceTree = "<group>"; };
 		2C5EE23125780FE80055DD57 /* ExplorerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerCell.swift; sourceTree = "<group>"; };
+		2C5EE23625781A400055DD57 /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		2C5EE241257887B00055DD57 /* PhotoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
+		2C5EE246257965AC0055DD57 /* PhotoAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,9 @@
 				2C5EE22125780D640055DD57 /* PhotoViewController.swift */,
 				2C5EE22925780E1C0055DD57 /* ExplorerTableViewController.swift */,
 				2C5EE23125780FE80055DD57 /* ExplorerCell.swift */,
+				2C5EE23625781A400055DD57 /* PhotoDetailsViewController.swift */,
+				2C5EE241257887B00055DD57 /* PhotoMapViewController.swift */,
+				2C5EE246257965AC0055DD57 /* PhotoAnnotation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +345,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5EE242257887B00055DD57 /* PhotoMapViewController.swift in Sources */,
+				2C5EE23725781A400055DD57 /* PhotoDetailsViewController.swift in Sources */,
 				2C5EE2112577D2EC0055DD57 /* Photo.swift in Sources */,
 				2C5EE20B2577CF640055DD57 /* PhotoService.swift in Sources */,
 				2C5EE1EE257663F80055DD57 /* Router.swift in Sources */,
@@ -348,6 +359,7 @@
 				2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */,
 				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
 				2C5EE2192577D7110055DD57 /* Image.swift in Sources */,
+				2C5EE247257965AD0055DD57 /* PhotoAnnotation.swift in Sources */,
 				2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -509,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
