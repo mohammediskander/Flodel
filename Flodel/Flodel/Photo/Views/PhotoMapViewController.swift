@@ -23,7 +23,6 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
         
         
         showAnnotations()
-        print("Annotations on map: \(mapView.annotations.count)")
     }
     
     
@@ -31,11 +30,9 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
     func showAnnotations() {
         self.photoService.photos.forEach {
             photo in
-//            mapView.addAnnotation(photo)
             let photoAnnotation = PhotoAnnotation()
             photoAnnotation.title = photo.title
             photoAnnotation.coordinate = photo.coordinate
-//            photoAnnotation.image = UIImage(systemName: "mappin")
             
             photoService.fetchImage(for: photo) {
                 [weak photoAnnotation] result in
@@ -43,7 +40,6 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
                 guard case let .success(image) = result else { return }
                 guard let photoAnnotation = photoAnnotation else { return }
                 
-                print("Current thread is main: \(Thread.current == Thread.main)")
                 photoAnnotation.image = image
             }
             
