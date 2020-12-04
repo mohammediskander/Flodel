@@ -48,6 +48,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    #warning("showUserLocation is being overrinden by photoAnnotation, fix this!")
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseIdentifier = "photoAnnotation"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)

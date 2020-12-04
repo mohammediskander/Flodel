@@ -13,6 +13,7 @@ class ExplorerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.tableView.dataSource = self.photoService
+        self.tableView.delegate = self.photoService
         photoService.delegate = self
     }
     

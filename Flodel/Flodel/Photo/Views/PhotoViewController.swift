@@ -22,13 +22,12 @@ class PhotoViewController: UIViewController {
             let destination = segue.destination as! ExplorerTableViewController
             
             destination.photoService = self.photoService
-            
         case "showPhotoMapViewController":
             let destination = segue.destination as! PhotoMapViewController
             
             destination.photoService = self.photoService
         default:
-            print("ERR::Unexpected segue identitifer \(segue.identifier).")
+            print("ERR::Unexpected segue identitifer \(String(describing: segue.identifier)).")
         }
     }
 }

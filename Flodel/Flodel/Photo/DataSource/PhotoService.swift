@@ -20,6 +20,8 @@ enum PhotoError: Error {
 class PhotoService: NSObject {
     
     private let imageStore = ImageStore()
+    private var requests: [IndexPath: ImageFetchingRequest] = [:]
+    private let imageFetcher = ImageFetcher()
     
     weak var delegate: PhotoServiceDelegate?
     typealias PhotoResult = Result<[Photo], Error>
@@ -42,6 +44,10 @@ class PhotoService: NSObject {
         super.init()
         
         self.fetchPhotos()
+    }
+    
+    @objc func handleMemoryWarning(_ notification: Notification) -> Void {
+        
     }
     
     func fetchPhotos(_ completion: @escaping () -> Void = { }) {
@@ -103,41 +109,41 @@ class PhotoService: NSObject {
         }
     }
     
-    func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
-        guard let photoKey = photo._id else {
-            completion(.failure(PhotoError.missingPhotoID))
-            return
-        }
-        
-        if let image = imageStore.image(forKey: photoKey) {
-            OperationQueue.main.addOperation {
-                completion(.success(image))
-            }
-        }
-        
-        guard let photoURL = photo.remoteURL else {
-            completion(.failure(PhotoError.missingImageURL))
-            return
-        }
-        
-        let request = URLRequest(url: photoURL)
-        
-        let task = session.dataTask(with: request) {
-            data, repsonse, error in
-            
-            let result = self.processImageRequest(data: data, error: error)
-            
-            if case let .success(image) = result {
-                self.imageStore.setImage(image, forKey: photoKey)
-            }
-            
-            OperationQueue.main.addOperation {
-                completion(result)
-            }
-        }
-        
-        task.resume()
-    }
+//    func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
+//        guard let photoKey = photo._id else {
+//            completion(.failure(PhotoError.missingPhotoID))
+//            return
+//        }
+//        
+//        if let image = imageStore.image(forKey: photoKey) {
+//            OperationQueue.main.addOperation {
+//                completion(.success(image))
+//            }
+//        }
+//        
+//        guard let photoURL = photo.remoteURL else {
+//            completion(.failure(PhotoError.missingImageURL))
+//            return
+//        }
+//        
+//        let request = URLRequest(url: photoURL)
+//        
+//        let task = session.dataTask(with: request) {
+//            data, repsonse, error in
+//            
+//            let result = self.processImageRequest(data: data, error: error)
+//            
+//            if case let .success(image) = result {
+//                self.imageStore.setImage(image, forKey: photoKey)
+//            }
+//            
+//            OperationQueue.main.addOperation {
+//                completion(result)
+//            }
+//        }
+//        
+//        task.resume()
+//    }
     
     private func processImageRequest(data: Data?, error: Error?) -> ImageResult {
         guard let imageData = data, let image = UIImage(data: imageData) else {
@@ -161,28 +167,74 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
         1
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let photo = self.photos[indexPath.section]
+        // First, check the image cache
+        if let photoId = photo._id, let image = imageStore.image(forKey: photoId), let cell = cell as? ExplorerCell {
+            cell.update(displaying: image)
+        }
+        
+        // Second, check to see if we've already requested an image for this cell
+        // and if so, just upgrade its priority
+        if let request = requests[indexPath] {
+            request.priority = .high
+            return
+        }
+        
+        let request = self.imageFetcher.fetch(url: photo.remoteURL!, priority: .high) {
+            result in
+            
+            let image: UIImage?
+            switch result {
+            case let .success(fetchedImage):
+                image = fetchedImage
+            case let .failure(error):
+                let photoId = photo._id ?? "<<unkown>>"
+                
+                switch error {
+                case ImageFetcher.Error.canceled:
+                    print("Cancelled fetching photo \(photoId)")
+                default:
+                    print("Failed to fetch photo with id \(photoId): \(error)")
+                }
+                
+                image = nil
+            }
+            
+            guard let fetchedImage = image else { return }
+            guard let photoIndex = self.photos.firstIndex(of: photo) else { return }
+            
+            let photoIndexPath = IndexPath(row: 0, section: photoIndex)
+            
+            OperationQueue.main.addOperation {
+                if let photoId = photo._id {
+                    self.imageStore.setImage(fetchedImage, forKey: photoId)
+                }
+                
+                // When the request finished, only update the cell if it's still visible
+                if let cell = tableView.cellForRow(at: photoIndexPath) as? ExplorerCell {
+                    cell.update(displaying: image)
+                }
+                
+                // Stop tracking the request once it's complete
+                self.requests[indexPath] = nil
+            }
+        }
+        
+        // Start tracking the request right after creating it..
+        OperationQueue.main.addOperation {
+            self.requests[indexPath] = request
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        requests[indexPath]?.priority = .low
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "explorerPhoto") as? ExplorerCell
         
         cell?.photo = self.photos[indexPath.section]
-        
-        // TODO: Found a way to give the current viewd cell(s) a higher priority than the others
-        DispatchQueue.global(qos: .background).async {
-            self.fetchImage(for: self.photos[indexPath.section]) {
-                (result) -> Void in
-                
-                guard case let .success(image) = result else {
-                    return
-                }
-                
-                // first check if the current cell is the viewing list..
-                if ((tableView.indexPathsForVisibleRows?.contains(indexPath)) != nil) {
-                    DispatchQueue.main.async {
-                        cell?.update(displaying: image)
-                    }
-                }
-            }
-        }
         
         return cell!
     }

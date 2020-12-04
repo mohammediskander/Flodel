@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2F3B38257A94C400CF0E21 /* ImageFetchingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B37257A94C400CF0E21 /* ImageFetchingRequest.swift */; };
+		2C2F3B3D257A94EF00CF0E21 /* ImageFetchingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B3C257A94EF00CF0E21 /* ImageFetchingOperation.swift */; };
+		2C2F3B42257A952100CF0E21 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B41257A952100CF0E21 /* ImageFetcher.swift */; };
 		2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1B9257663880055DD57 /* AppDelegate.swift */; };
 		2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1BB257663880055DD57 /* SceneDelegate.swift */; };
 		2C5EE1BE257663880055DD57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1BD257663880055DD57 /* ViewController.swift */; };
@@ -48,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C2F3B37257A94C400CF0E21 /* ImageFetchingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingRequest.swift; sourceTree = "<group>"; };
+		2C2F3B3C257A94EF00CF0E21 /* ImageFetchingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingOperation.swift; sourceTree = "<group>"; };
+		2C2F3B41257A952100CF0E21 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		2C5EE1B6257663880055DD57 /* Flodel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flodel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5EE1B9257663880055DD57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C5EE1BB257663880055DD57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +186,9 @@
 			children = (
 				2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */,
 				2C5EE20A2577CF640055DD57 /* PhotoService.swift */,
+				2C2F3B37257A94C400CF0E21 /* ImageFetchingRequest.swift */,
+				2C2F3B3C257A94EF00CF0E21 /* ImageFetchingOperation.swift */,
+				2C2F3B41257A952100CF0E21 /* ImageFetcher.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -350,6 +359,7 @@
 				2C5EE2112577D2EC0055DD57 /* Photo.swift in Sources */,
 				2C5EE20B2577CF640055DD57 /* PhotoService.swift in Sources */,
 				2C5EE1EE257663F80055DD57 /* Router.swift in Sources */,
+				2C2F3B42257A952100CF0E21 /* ImageFetcher.swift in Sources */,
 				2C5EE1BE257663880055DD57 /* ViewController.swift in Sources */,
 				2C5EE1F5257668BD0055DD57 /* PhotoRouter.swift in Sources */,
 				2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */,
@@ -360,6 +370,8 @@
 				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
 				2C5EE2192577D7110055DD57 /* Image.swift in Sources */,
 				2C5EE247257965AD0055DD57 /* PhotoAnnotation.swift in Sources */,
+				2C2F3B38257A94C400CF0E21 /* ImageFetchingRequest.swift in Sources */,
+				2C2F3B3D257A94EF00CF0E21 /* ImageFetchingOperation.swift in Sources */,
 				2C5EE22225780D640055DD57 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

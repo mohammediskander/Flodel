@@ -38,7 +38,7 @@ enum PhotoRouter: Router {
                 "method": "flickr.photos.search",
                 "format": "json",
                 "nojsoncallback": "1",
-                "per_page": "30"
+                "per_page": "500"
             ]
         }
     }
