@@ -34,13 +34,30 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
             photoAnnotation.title = photo.title
             photoAnnotation.coordinate = photo.coordinate
             
-            photoService.fetchImage(for: photo) {
-                [weak photoAnnotation] result in
-                
-                guard case let .success(image) = result else { return }
-                guard let photoAnnotation = photoAnnotation else { return }
+//            photoService.fetchImage(for: photo) {
+//                [weak photoAnnotation] result in
+//
+//                guard case let .success(image) = result else { return }
+//                guard let photoAnnotation = photoAnnotation else { return }
+//
+//                photoAnnotation.image = image
+//            }
+            
+            photoService.fetchImage(for: photo, cached: {
+                image in
                 
                 photoAnnotation.image = image
+                
+            }) {
+                result in
+                
+                switch result {
+                case let .success(image):
+                    photoAnnotation.image = image
+                    
+                case let .failure(error):
+                    print("ERR::Failed to fetch an image with an id of \(String(describing: photo._id)).", error)
+                }
             }
             
             let pinAnnotationView = MKPinAnnotationView(annotation: photoAnnotation, reuseIdentifier: "photoAnnotation")

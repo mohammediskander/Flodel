@@ -35,18 +35,20 @@ class PhotoDetailsViewController: UIViewController {
         }
         self.detailsLabel.text = "\(photo.dateTaken.fromNow()), \(distance)"
         self.titleLabel.text = photo.title?.isEmpty ?? true ? "<<unkown>>" : photo.title
-//        self.photoService.fetchImage(for: photo) {
-//            [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case let .success(image):
-//                self.photoView.image = image
-//            case let .failure(error):
-//                print("ERR::Failed to fetch an image with id \(String(describing: self.photo._id))", error)
-//            }
-//        }
+        
+        self.photoService.fetchImage(for: photo, cached: {
+            image in
+            
+            self.photoView.image = image
+        }) {
+            [weak self] result in
+            
+            guard let self = self else { return }
+            
+            if case let .success(image) = result {
+                self.photoView.image = image
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
