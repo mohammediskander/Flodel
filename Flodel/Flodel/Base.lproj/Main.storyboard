@@ -75,6 +75,9 @@
                                             <segment title="Newest"/>
                                             <segment title="Nearest"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="handlePhotosSortSegmentChanged:" destination="oJk-ap-tTy" eventType="valueChanged" id="Soe-Yu-s5n"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
@@ -108,6 +111,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="photosSortSegmentView" destination="0t7-eK-xhB" id="ehr-WK-Rc8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwo-o4-2DU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,6 +10,8 @@ import UIKit
 class PhotoViewController: UIViewController {
     private let photoService = PhotoService()
     
+    @IBOutlet var photosSortSegmentView: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +30,18 @@ class PhotoViewController: UIViewController {
             destination.photoService = self.photoService
         default:
             print("ERR::Unexpected segue identitifer \(String(describing: segue.identifier)).")
+        }
+    }
+    
+    @IBAction func handlePhotosSortSegmentChanged(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            photoService.setSort(by: .newest)
+        case 1:
+            photoService.setSort(by: .nearest)
+        default:
+            preconditionFailure("ERR::Unkown segment index")
         }
     }
 }

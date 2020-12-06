@@ -29,7 +29,25 @@ class PhotoService: NSObject {
     private let imageFetcher = ImageFetcher()
     
     // sort
-    private let sortBy: PhotosSort = .nearest
+    private(set) var sortBy: PhotosSort = .newest {
+        didSet {
+            switch self.sortBy {
+            case .newest:
+                photos = photos.sorted {
+                    lhs, rhs in
+                    
+                    return lhs.dateTaken > rhs.dateTaken
+                }
+                
+            case .nearest:
+                photos = photos.sorted {
+                    lhs, rhs in
+                    
+                    return lhs.distance < rhs.distance
+                }
+            }
+        }
+    }
     
     weak var delegate: PhotoServiceDelegate?
     typealias PhotoResult = Result<[Photo], Error>
@@ -70,6 +88,11 @@ class PhotoService: NSObject {
         super.init()
         
         self.fetchPhotos()
+    }
+    
+    
+    func setSort(by sort: PhotosSort) {
+        self.sortBy = sort
     }
     
     func fetchPhotos(_ completion: @escaping () -> Void = { }) {
