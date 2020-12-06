@@ -27,12 +27,8 @@ class ImageFetcher {
     }()
     
     @discardableResult
-    func fetch(url: URL, priority: ImageFetcher.Priority, completion: @escaping ResultHandler) -> ImageFetchingRequest {
-//        let imageOperation = ImageFetchingOperation(url: URL, priority: Priority, completion: completion)
-//        let request = ImageFetchingRequest(operation: imageOperation, queue: fetchingQueue)
-        
+    func fetch(_ url: URL, priority: ImageFetcher.Priority, completion: @escaping ResultHandler) -> ImageFetchingRequest {
         let imageOperation = ImageFetchingOperation(url: url, priority: priority, completion: completion)
-        
         let request = ImageFetchingRequest(operation: imageOperation, queue: fetchingQueue)
         
         return request
