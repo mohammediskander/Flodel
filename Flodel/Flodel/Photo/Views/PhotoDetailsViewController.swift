@@ -9,11 +9,10 @@ import UIKit
 
 class PhotoDetailsViewController: UIViewController {
     
-    @IBOutlet var photoView: UIImageView!
-    @IBOutlet var likesCountLabel: UILabel!
-    @IBOutlet var detailsLabel: UILabel!
-    @IBOutlet var titleLabel: UILabel!
-    
+    var photoView: UIImageView!
+    var likesCountLabel: UILabel?
+    var detailsLabel: UILabel?
+    var titleLabel: UILabel?
     
     var photo: Photo!
     var photoService: PhotoService!
@@ -22,6 +21,15 @@ class PhotoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
+        self.view.backgroundColor = .systemBackground
+        
+        self.photoView = UIImageView()
+        self.view.addSubview(photoView)
+        photoView.contentMode = .scaleAspectFit
+        photoView.setConstraints([
+            .horizontal(padding: 15),
+            .vertical(padding: 15)
+        ])
         
         configureView()
     }
@@ -33,20 +41,19 @@ class PhotoDetailsViewController: UIViewController {
         } else {
             distance = "\(Int((photo.distance * 1000).rounded()))m"
         }
-        self.detailsLabel.text = "\(photo.dateTaken.fromNow()), \(distance)"
-        self.titleLabel.text = photo.title?.isEmpty ?? true ? "<<unkown>>" : photo.title
+        self.detailsLabel?.text = "\(photo.dateTaken.fromNow()), \(distance)"
+        self.titleLabel?.text = photo.title?.isEmpty ?? true ? "<<unkown>>" : photo.title
         
         self.photoService.fetchImage(for: photo, cached: {
             image in
-            
-            self.photoView.image = image
+            self.photoView?.image = image
         }) {
             [weak self] result in
             
             guard let self = self else { return }
             
             if case let .success(image) = result {
-                self.photoView.image = image
+                self.photoView?.image = image
             }
         }
     }

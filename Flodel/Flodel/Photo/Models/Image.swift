@@ -44,7 +44,7 @@ class ImageStore {
         do {
             try FileManager.default.removeItem(at: url)
         } catch {
-            print("ERR::An occure while removing image with key \(key) from dist.", error)
+            print("\(#function) ERR::An occure while removing image with key \(key) from dist.", error)
         }
     }
     

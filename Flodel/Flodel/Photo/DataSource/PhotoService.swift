@@ -108,7 +108,7 @@ class PhotoService: NSObject {
                 
                 completion()
             case let .failure(error):
-                print("ERR::\(error)")
+                print("\(#function) ERR::\(error)")
             }
         }
     }
@@ -125,7 +125,7 @@ class PhotoService: NSObject {
                 self.photos.append(contentsOf: photos)
                 
             case let .failure(error):
-                print("ERR::\(error)")
+                print("\(#function) ERR::\(error)")
             }
         }
     }
@@ -155,7 +155,7 @@ class PhotoService: NSObject {
             
             task.resume()
         } catch {
-            print("ERR::\(error)")
+            print("\(#function) ERR::\(error)")
         }
     }
     
@@ -172,15 +172,13 @@ class PhotoService: NSObject {
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
             
             let photosResponse = try decoder.decode(PhotosResponse.self, from: data!)
-            
             self.pages = photosResponse.photosInfo.pages
             
-            print("page: \(photosResponse.photosInfo.page) / \(photosResponse.photosInfo.pages)")
             let filteredPhotos = photosResponse.photosInfo.photo.filter { $0.remoteURL != nil }
             
             return .success(filteredPhotos)
         } catch {
-            print("ERR::\(error)")
+            print("\(#function) sERR::\(error)")
             return .failure(error)
         }
     }
@@ -214,9 +212,9 @@ class PhotoService: NSObject {
                 
                 switch error {
                 case ImageFetcher.Error.canceled:
-                    print("Cancelled fetching photo \(photoId)")
+                    print("\(#function) Cancelled fetching photo \(photoId)")
                 default:
-                    print("Failed to fetch photo with id \(photoId): \(error)")
+                    print("\(#function) ERR::Failed to fetch photo with id \(photoId): \(error)")
                 }
                 
                 image = nil
@@ -244,7 +242,11 @@ class PhotoService: NSObject {
     }
 }
 
-extension PhotoService: UITableViewDelegate, UITableViewDataSource {
+extension PhotoService: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print(#function, "indexPaths", indexPaths)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.photos.count
     }
@@ -277,7 +279,7 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                 case let .failure(error):
-                    print("ERR::Failed to fetch an image with id \(String(describing: photo._id)): \(error)")
+                    print("\(#function) ERR::Failed to fetch an image with id \(String(describing: photo._id)): \(error)")
                 }
         }
     }
@@ -291,7 +293,7 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
         
         cell?.photo = self.photos[indexPath.section]
         
-        if indexPath.section == photos.count - 1, photos.count != 0, self.page < self.pages! {
+        if indexPath.section == photos.count - 4, photos.count != 0, self.page < self.pages! {
             self.page += 1
             self.loadPhotos(in: self.page)
         }

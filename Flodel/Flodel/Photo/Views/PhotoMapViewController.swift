@@ -33,6 +33,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
             let photoAnnotation = PhotoAnnotation()
             photoAnnotation.title = photo.title
             photoAnnotation.coordinate = photo.coordinate
+            photoAnnotation.photo = photo
             
 //            photoService.fetchImage(for: photo) {
 //                [weak photoAnnotation] result in
@@ -56,12 +57,25 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
                     photoAnnotation.image = image
                     
                 case let .failure(error):
-                    print("ERR::Failed to fetch an image with an id of \(String(describing: photo._id)).", error)
+                    print("\(#function) ERR::Failed to fetch an image with an id of \(String(describing: photo._id)).", error)
                 }
             }
             
             let pinAnnotationView = MKPinAnnotationView(annotation: photoAnnotation, reuseIdentifier: "photoAnnotation")
             self.mapView.addAnnotation(pinAnnotationView.annotation!)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        mapView.selectedAnnotations.removeAll()
+        if view.reuseIdentifier == "photoAnnotation" {
+            let photoDetailsViewController = PhotoDetailsViewController()
+            guard let photoAnnotation = view.annotation as? PhotoAnnotation else { return }
+            
+            photoDetailsViewController.photo = photoAnnotation.photo
+            photoDetailsViewController.photoService = photoService
+
+            self.present(photoDetailsViewController, animated: true)
         }
     }
     
@@ -71,23 +85,19 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         let reuseIdentifier = "photoAnnotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? PhotoAnnotationView
 
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            annotationView = PhotoAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         } else {
             annotationView?.annotation = annotation
         }
         
-        annotationView?.layer.cornerRadius = 12.5
-        annotationView?.layer.masksToBounds = true
         annotationView?.displayPriority = .defaultHigh
-        annotationView?.translatesAutoresizingMaskIntoConstraints = false
-        annotationView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        annotationView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
-
+        
+        
         if let customPointAnnotation = annotation as? PhotoAnnotation {
-            annotationView?.image = customPointAnnotation.image
+            annotationView?.photoImage = customPointAnnotation.image
         }
 
         return annotationView

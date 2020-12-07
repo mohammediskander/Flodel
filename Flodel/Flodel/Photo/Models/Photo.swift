@@ -69,6 +69,4 @@ extension Photo: MKAnnotation {
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: Double(self.latitude)!, longitude: Double(longitude)!)
     }
-    
-    
 }

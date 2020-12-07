@@ -29,10 +29,10 @@ class ExplorerCell: UITableViewCell {
         
         self.photoDetails.text = "\(self.photo.dateTaken.fromNow()), \(distance!) away"
         
-        self.photoDetails.layer.shadowColor = UIColor.black.cgColor
+        self.photoDetails.layer.shadowColor = UIColor(named: "Adaptive Text Shadow")?.cgColor
         self.photoDetails.layer.shadowOffset = .zero
         self.photoDetails.layer.shadowRadius = 1
-        self.photoDetails.layer.shadowOpacity = 1
+        self.photoDetails.layer.shadowOpacity = 100
     }
     
     func update(displaying image: UIImage?) {

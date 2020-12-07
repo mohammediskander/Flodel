@@ -25,12 +25,15 @@ class ExplorerTableViewController: UITableViewController {
             destination.photo = photoService.photos[tableView.indexPathForSelectedRow!.section]
             destination.photoService = self.photoService
         default:
-            print("ERR::Unexpected segue with identifier \(segue.identifier!)")
+            print("\(#function) ERR::Unexpected segue with identifier \(segue.identifier!)")
         }
     }
     
     
     @IBAction func handleTableViewRefreshRequest(_ sender: UIRefreshControl) {
+        self.photoService.page = 1
+        self.photoService.pages = nil
+        
         self.photoService.fetchPhotos {
             [weak sender] in
             
