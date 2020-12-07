@@ -17,9 +17,37 @@ enum PhotoError: Error {
     case missingPhotoID
 }
 
+enum PhotosSort: String {
+    case newest = "date-taken-desc"
+    case nearest = "geo-desc"
+}
+
 class PhotoService: NSObject {
     
     private let imageStore = ImageStore()
+    private var requests: [IndexPath: ImageFetchingRequest] = [:]
+    private let imageFetcher = ImageFetcher()
+    
+    // sort
+    private(set) var sortBy: PhotosSort = .newest {
+        didSet {
+            switch self.sortBy {
+            case .newest:
+                photos = photos.sorted {
+                    lhs, rhs in
+                    
+                    return lhs.dateTaken > rhs.dateTaken
+                }
+                
+            case .nearest:
+                photos = photos.sorted {
+                    lhs, rhs in
+                    
+                    return lhs.distance < rhs.distance
+                }
+            }
+        }
+    }
     
     weak var delegate: PhotoServiceDelegate?
     typealias PhotoResult = Result<[Photo], Error>
@@ -28,10 +56,28 @@ class PhotoService: NSObject {
     var photos: [Photo] = [] {
         didSet {
             if photos != oldValue {
+                switch self.sortBy {
+                case .newest:
+                    photos = photos.sorted {
+                        lhs, rhs in
+                        
+                        return lhs.dateTaken > rhs.dateTaken
+                    }
+                    
+                case .nearest:
+                    photos = photos.sorted {
+                        lhs, rhs in
+                        
+                        return lhs.distance < rhs.distance
+                    }
+                }
                 self.delegate?.photosLoaded()
             }
         }
     }
+    
+    var page: Int = 1
+    var pages: Int?
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -44,26 +90,59 @@ class PhotoService: NSObject {
         self.fetchPhotos()
     }
     
-    func fetchPhotos() {
-        let latitude = UserDefaults.standard.double(forKey: "user.currentLocaiton.latitude")
-        let longitude = UserDefaults.standard.double(forKey: "user.currentLocaiton.longitude")
+    
+    func setSort(by sort: PhotosSort) {
+        self.sortBy = sort
+    }
+    
+    func fetchPhotos(_ completion: @escaping () -> Void = { }) {
+        let latitude = UserDefaults.standard.double(forKey: "user.currentLocation.latitude")
+        let longitude = UserDefaults.standard.double(forKey: "user.currentLocation.longitude")
         
-        self.getPhotos(at: (latitude: latitude, longitude: longitude)) {
+        self.getPhotos(at: (latitude: latitude, longitude: longitude), in: self.page) {
             result in
             
             switch result {
             case let .success(photos):
                 self.photos = photos.sorted(by: { lhs, rhs -> Bool in lhs.distance < rhs.distance })
+                
+                completion()
             case let .failure(error):
-                print("ERR::\(error)")
+                print("\(#function) ERR::\(error)")
             }
         }
     }
     
-    func getPhotos(at coordinates: (latitude: Double, longitude: Double), completion: @escaping (PhotoResult) -> Void) {
-        do {
-            let urlRequest = try PhotoRouter.photosSearch(latitude: coordinates.latitude, longitude: coordinates.longitude).asURLRequest()
+    func loadPhotos(in page: Int = 1) {
+        let latitude = UserDefaults.standard.double(forKey: "user.currentLocation.latitude")
+        let longitude = UserDefaults.standard.double(forKey: "user.currentLocation.longitude")
+        
+        self.getPhotos(at: (latitude: latitude, longitude: longitude), in: self.page) {
+            result in
             
+            switch result {
+            case let .success(photos):
+                self.photos.append(contentsOf: photos)
+                
+            case let .failure(error):
+                print("\(#function) ERR::\(error)")
+            }
+        }
+    }
+    
+    func getPhotos(at coordinates: (latitude: Double, longitude: Double), in page: Int = 1, completion: @escaping (PhotoResult) -> Void) {
+        do {
+            
+            // Prepare the request first
+            let urlRequest = try PhotoRouter.photosSearch(
+                latitude: coordinates.latitude,
+                longitude: coordinates.longitude,
+                page: page,
+                sort: self.sortBy
+            ).asURLRequest()
+            
+            
+            // Then start session task with it
             let task = self.session.dataTask(with: urlRequest) {
                 data, response, error in
                 
@@ -76,7 +155,7 @@ class PhotoService: NSObject {
             
             task.resume()
         } catch {
-            print("ERR::\(error)")
+            print("\(#function) ERR::\(error)")
         }
     }
     
@@ -85,72 +164,89 @@ class PhotoService: NSObject {
             let decoder = JSONDecoder()
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-DD HH:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
             
             let photosResponse = try decoder.decode(PhotosResponse.self, from: data!)
-            let filteredPhotos = photosResponse.photosInfo.photos.filter { $0.remoteURL != nil }
+            self.pages = photosResponse.photosInfo.pages
+            
+            let filteredPhotos = photosResponse.photosInfo.photo.filter { $0.remoteURL != nil }
             
             return .success(filteredPhotos)
         } catch {
-            print("ERR::\(error)")
+            print("\(#function) sERR::\(error)")
             return .failure(error)
         }
     }
     
-    func fetchImage(for photo: Photo, completion: @escaping (ImageResult) -> Void) {
-        guard let photoKey = photo._id else {
-            completion(.failure(PhotoError.missingPhotoID))
+    func fetchImage(for photo: Photo, cached cache: @escaping (_ image: UIImage) -> Void,  completion: @escaping (ImageResult) -> Void) {
+        
+        // First, check the image cache
+        if let photoId = photo._id, let image = imageStore.image(forKey: photoId) {
+            cache(image)
             return
         }
         
-        if let image = imageStore.image(forKey: photoKey) {
-            OperationQueue.main.addOperation {
-                completion(.success(image))
-            }
-        }
+        let indexPath = IndexPath(row: 0, section: self.photos.firstIndex(of: photo)!)
         
-        guard let photoURL = photo.remoteURL else {
-            completion(.failure(PhotoError.missingImageURL))
+        // Second, check to see if we've already requested an image for this cell
+        // and if so, just upgrade its priority
+        if let request = requests[indexPath] {
+            request.priority = .high
             return
         }
         
-        let request = URLRequest(url: photoURL)
-        
-        let task = session.dataTask(with: request) {
-            data, repsonse, error in
+        let request = self.imageFetcher.fetch(photo.remoteURL!, priority: .high) {
+            result in
             
-            let result = self.processImageRequest(data: data, error: error)
-            
-            if case let .success(image) = result {
-                self.imageStore.setImage(image, forKey: photoKey)
+            let image: UIImage?
+            switch result {
+            case let .success(fetchedImage):
+                image = fetchedImage
+            case let .failure(error):
+                let photoId = photo._id ?? "<<unkown>>"
+                
+                switch error {
+                case ImageFetcher.Error.canceled:
+                    print("\(#function) Cancelled fetching photo \(photoId)")
+                default:
+                    print("\(#function) ERR::Failed to fetch photo with id \(photoId): \(error)")
+                }
+                
+                image = nil
             }
+            
+            guard let fetchedImage = image else { return }
             
             OperationQueue.main.addOperation {
-                completion(result)
+                if let photoId = photo._id {
+                    self.imageStore.setImage(fetchedImage, forKey: photoId)
+                }
+                
+                // When the request finished, only update the cell if it's still visible
+                completion(.success(image!))
+                
+                // Stop tracking the request once it's complete
+                self.requests[indexPath] = nil
             }
         }
         
-        task.resume()
-    }
-    
-    func processImageRequest(data: Data?, error: Error?) -> ImageResult {
-        guard let imageData = data, let image = UIImage(data: imageData) else {
-            if data == nil {
-                return .failure(error!)
-            } else {
-                return .failure(PhotoError.imageCreationError)
-            }
+        // Start tracking the request right after creating it..
+        OperationQueue.main.addOperation {
+            self.requests[indexPath] = request
         }
-        
-        return .success(image)
     }
 }
 
-extension PhotoService: UITableViewDelegate, UITableViewDataSource {
+extension PhotoService: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print(#function, "indexPaths", indexPaths)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.photos.count
     }
@@ -159,30 +255,51 @@ extension PhotoService: UITableViewDelegate, UITableViewDataSource {
         1
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let photo = self.photos[indexPath.section]
+        
+        self.fetchImage(for: photo, cached: {
+            image in
+            
+            if let cell = cell as? ExplorerCell {
+                cell.update(displaying: image)
+            }
+            
+        }) {
+            result in
+                switch result {
+                case let .success(image):
+                    
+                    guard let photoIndex = self.photos.firstIndex(of: photo) else { return }
+                    let photoIndexPath = IndexPath(row: 0, section: photoIndex)
+                    
+                    if let cell = tableView.cellForRow(at: photoIndexPath) {
+                        if let cell = cell  as? ExplorerCell {
+                            cell.update(displaying: image)
+                        }
+                    }
+                case let .failure(error):
+                    print("\(#function) ERR::Failed to fetch an image with id \(String(describing: photo._id)): \(error)")
+                }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        requests[indexPath]?.priority = .low
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "explorerPhoto") as? ExplorerCell
         
         cell?.photo = self.photos[indexPath.section]
-        cell?.update(displaying: nil)
         
-        DispatchQueue.global(qos: .background).async {
-            self.fetchImage(for: self.photos[indexPath.section]) {
-                (result) -> Void in
-                
-                guard case let .success(image) = result else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    cell?.update(displaying: image)
-                }
-            }
+        if indexPath.section == photos.count - 4, photos.count != 0, self.page < self.pages! {
+            self.page += 1
+            self.loadPhotos(in: self.page)
         }
         
         return cell!
     }
-    
-    
 }
 
 struct PhotosResponse: Codable {
@@ -194,9 +311,13 @@ struct PhotosResponse: Codable {
 }
 
 struct FlickrPhotosResponse: Codable {
-    let photos: [Photo]
+    let photo: [Photo]
+    let page: Int
+    let pages: Int
     
     enum CodingKeys: String, CodingKey {
-        case photos = "photo"
+        case photo
+        case page
+        case pages
     }
 }

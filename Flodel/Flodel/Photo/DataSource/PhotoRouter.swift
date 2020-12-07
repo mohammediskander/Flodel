@@ -8,7 +8,7 @@
 import Foundation
 
 enum PhotoRouter: Router {
-    case photosSearch(latitude: Double, longitude: Double)
+    case photosSearch(latitude: Double, longitude: Double, page: Int, sort: PhotosSort)
     
     static var baseURL: URL? = URL(string: "https://api.flickr.com/services/rest/")
     
@@ -28,7 +28,7 @@ enum PhotoRouter: Router {
     
     var parameters: Parameters? {
         switch self {
-        case let .photosSearch(latitude, longitude):
+        case let .photosSearch(latitude, longitude, page, sort):
             return [
                 "lat": String(latitude),
                 "lon": String(longitude),
@@ -38,7 +38,9 @@ enum PhotoRouter: Router {
                 "method": "flickr.photos.search",
                 "format": "json",
                 "nojsoncallback": "1",
-                "per_page": "500"
+                "per_page": "20",
+                "page": String(page),
+                "sort": sort.rawValue
             ]
         }
     }

@@ -6,13 +6,42 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ExplorerTableViewController: UITableViewController {
     var photoService: PhotoService!
     
     override func viewDidLoad() {
         self.tableView.dataSource = self.photoService
+        self.tableView.delegate = self.photoService
         photoService.delegate = self
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showPhotoDetails":
+            let destination = segue.destination as! PhotoDetailsViewController
+            
+            destination.photo = photoService.photos[tableView.indexPathForSelectedRow!.section]
+            destination.photoService = self.photoService
+        default:
+            print("\(#function) ERR::Unexpected segue with identifier \(segue.identifier!)")
+        }
+    }
+    
+    
+    @IBAction func handleTableViewRefreshRequest(_ sender: UIRefreshControl) {
+        self.photoService.page = 1
+        self.photoService.pages = nil
+        
+        self.photoService.fetchPhotos {
+            [weak sender] in
+            
+            guard let sender = sender else {
+                return
+            }
+            sender.endRefreshing()
+        }
     }
 }
 
