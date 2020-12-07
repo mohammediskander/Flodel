@@ -10,14 +10,18 @@
 		2C2F3B38257A94C400CF0E21 /* ImageFetchingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B37257A94C400CF0E21 /* ImageFetchingRequest.swift */; };
 		2C2F3B3D257A94EF00CF0E21 /* ImageFetchingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B3C257A94EF00CF0E21 /* ImageFetchingOperation.swift */; };
 		2C2F3B42257A952100CF0E21 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B41257A952100CF0E21 /* ImageFetcher.swift */; };
+		2C2F3B5C257DA55D00CF0E21 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B5B257DA55D00CF0E21 /* Constraints.swift */; };
+		2C2F3B67257E82BC00CF0E21 /* PhotoRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B66257E82BC00CF0E21 /* PhotoRouterTests.swift */; };
+		2C2F3B6C257E833400CF0E21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B6B257E833400CF0E21 /* Constants.swift */; };
+		2C2F3B71257E835600CF0E21 /* FlickrConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B70257E835600CF0E21 /* FlickrConstants.swift */; };
+		2C2F3B76257EA96C00CF0E21 /* PhotoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B75257EA96C00CF0E21 /* PhotoServiceTests.swift */; };
+		2C2F3B7B257EBFD300CF0E21 /* FakeFlickrURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F3B7A257EBFD300CF0E21 /* FakeFlickrURLProtocol.swift */; };
 		2C5EE1BA257663880055DD57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1B9257663880055DD57 /* AppDelegate.swift */; };
 		2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1BB257663880055DD57 /* SceneDelegate.swift */; };
 		2C5EE1BE257663880055DD57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1BD257663880055DD57 /* ViewController.swift */; };
 		2C5EE1C1257663880055DD57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5EE1BF257663880055DD57 /* Main.storyboard */; };
 		2C5EE1C32576638D0055DD57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5EE1C22576638D0055DD57 /* Assets.xcassets */; };
 		2C5EE1C62576638D0055DD57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5EE1C42576638D0055DD57 /* LaunchScreen.storyboard */; };
-		2C5EE1D12576638D0055DD57 /* FlodelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1D02576638D0055DD57 /* FlodelTests.swift */; };
-		2C5EE1DC2576638D0055DD57 /* FlodelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */; };
 		2C5EE1EE257663F80055DD57 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1ED257663F80055DD57 /* Router.swift */; };
 		2C5EE1F5257668BD0055DD57 /* PhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */; };
 		2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */; };
@@ -41,19 +45,18 @@
 			remoteGlobalIDString = 2C5EE1B5257663880055DD57;
 			remoteInfo = Flodel;
 		};
-		2C5EE1D82576638D0055DD57 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C5EE1AE257663870055DD57 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2C5EE1B5257663880055DD57;
-			remoteInfo = Flodel;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2C2F3B37257A94C400CF0E21 /* ImageFetchingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingRequest.swift; sourceTree = "<group>"; };
 		2C2F3B3C257A94EF00CF0E21 /* ImageFetchingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchingOperation.swift; sourceTree = "<group>"; };
 		2C2F3B41257A952100CF0E21 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		2C2F3B5B257DA55D00CF0E21 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		2C2F3B66257E82BC00CF0E21 /* PhotoRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRouterTests.swift; sourceTree = "<group>"; };
+		2C2F3B6B257E833400CF0E21 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2C2F3B70257E835600CF0E21 /* FlickrConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrConstants.swift; sourceTree = "<group>"; };
+		2C2F3B75257EA96C00CF0E21 /* PhotoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceTests.swift; sourceTree = "<group>"; };
+		2C2F3B7A257EBFD300CF0E21 /* FakeFlickrURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFlickrURLProtocol.swift; sourceTree = "<group>"; };
 		2C5EE1B6257663880055DD57 /* Flodel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flodel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5EE1B9257663880055DD57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C5EE1BB257663880055DD57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,11 +66,7 @@
 		2C5EE1C52576638D0055DD57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C5EE1C72576638D0055DD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5EE1CC2576638D0055DD57 /* FlodelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlodelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C5EE1D02576638D0055DD57 /* FlodelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlodelTests.swift; sourceTree = "<group>"; };
 		2C5EE1D22576638D0055DD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C5EE1D72576638D0055DD57 /* FlodelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlodelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlodelUITests.swift; sourceTree = "<group>"; };
-		2C5EE1DD2576638D0055DD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5EE1ED257663F80055DD57 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		2C5EE1F4257668BD0055DD57 /* PhotoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRouter.swift; sourceTree = "<group>"; };
 		2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+URLComponents.swift"; sourceTree = "<group>"; };
@@ -98,13 +97,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2C5EE1D42576638D0055DD57 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -113,7 +105,6 @@
 			children = (
 				2C5EE1B8257663880055DD57 /* Flodel */,
 				2C5EE1CF2576638D0055DD57 /* FlodelTests */,
-				2C5EE1DA2576638D0055DD57 /* FlodelUITests */,
 				2C5EE1B7257663880055DD57 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,7 +114,6 @@
 			children = (
 				2C5EE1B6257663880055DD57 /* Flodel.app */,
 				2C5EE1CC2576638D0055DD57 /* FlodelTests.xctest */,
-				2C5EE1D72576638D0055DD57 /* FlodelUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,19 +138,14 @@
 		2C5EE1CF2576638D0055DD57 /* FlodelTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C5EE1D02576638D0055DD57 /* FlodelTests.swift */,
 				2C5EE1D22576638D0055DD57 /* Info.plist */,
+				2C2F3B66257E82BC00CF0E21 /* PhotoRouterTests.swift */,
+				2C2F3B6B257E833400CF0E21 /* Constants.swift */,
+				2C2F3B70257E835600CF0E21 /* FlickrConstants.swift */,
+				2C2F3B75257EA96C00CF0E21 /* PhotoServiceTests.swift */,
+				2C2F3B7A257EBFD300CF0E21 /* FakeFlickrURLProtocol.swift */,
 			);
 			path = FlodelTests;
-			sourceTree = "<group>";
-		};
-		2C5EE1DA2576638D0055DD57 /* FlodelUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2C5EE1DB2576638D0055DD57 /* FlodelUITests.swift */,
-				2C5EE1DD2576638D0055DD57 /* Info.plist */,
-			);
-			path = FlodelUITests;
 			sourceTree = "<group>";
 		};
 		2C5EE1EC257663C80055DD57 /* Utilites */ = {
@@ -198,6 +183,7 @@
 			children = (
 				2C5EE1FD2577C7450055DD57 /* URL+URLComponents.swift */,
 				2C5EE2052577CA790055DD57 /* URLRequest+QueryItems.swift */,
+				2C2F3B5B257DA55D00CF0E21 /* Constraints.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,24 +248,6 @@
 			productReference = 2C5EE1CC2576638D0055DD57 /* FlodelTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2C5EE1D62576638D0055DD57 /* FlodelUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C5EE1E62576638D0055DD57 /* Build configuration list for PBXNativeTarget "FlodelUITests" */;
-			buildPhases = (
-				2C5EE1D32576638D0055DD57 /* Sources */,
-				2C5EE1D42576638D0055DD57 /* Frameworks */,
-				2C5EE1D52576638D0055DD57 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2C5EE1D92576638D0055DD57 /* PBXTargetDependency */,
-			);
-			name = FlodelUITests;
-			productName = FlodelUITests;
-			productReference = 2C5EE1D72576638D0055DD57 /* FlodelUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -294,10 +262,7 @@
 					};
 					2C5EE1CB2576638D0055DD57 = {
 						CreatedOnToolsVersion = 12.2;
-						TestTargetID = 2C5EE1B5257663880055DD57;
-					};
-					2C5EE1D62576638D0055DD57 = {
-						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 						TestTargetID = 2C5EE1B5257663880055DD57;
 					};
 				};
@@ -317,7 +282,6 @@
 			targets = (
 				2C5EE1B5257663880055DD57 /* Flodel */,
 				2C5EE1CB2576638D0055DD57 /* FlodelTests */,
-				2C5EE1D62576638D0055DD57 /* FlodelUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -334,13 +298,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2C5EE1CA2576638D0055DD57 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C5EE1D52576638D0055DD57 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,6 +323,7 @@
 				2C5EE22A25780E1C0055DD57 /* ExplorerTableViewController.swift in Sources */,
 				2C5EE23225780FE80055DD57 /* ExplorerCell.swift in Sources */,
 				2C5EE1BC257663880055DD57 /* SceneDelegate.swift in Sources */,
+				2C2F3B5C257DA55D00CF0E21 /* Constraints.swift in Sources */,
 				2C5EE2062577CA790055DD57 /* URLRequest+QueryItems.swift in Sources */,
 				2C5EE1FE2577C7450055DD57 /* URL+URLComponents.swift in Sources */,
 				2C5EE2192577D7110055DD57 /* Image.swift in Sources */,
@@ -380,15 +338,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5EE1D12576638D0055DD57 /* FlodelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2C5EE1D32576638D0055DD57 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2C5EE1DC2576638D0055DD57 /* FlodelUITests.swift in Sources */,
+				2C2F3B76257EA96C00CF0E21 /* PhotoServiceTests.swift in Sources */,
+				2C2F3B67257E82BC00CF0E21 /* PhotoRouterTests.swift in Sources */,
+				2C2F3B71257E835600CF0E21 /* FlickrConstants.swift in Sources */,
+				2C2F3B6C257E833400CF0E21 /* Constants.swift in Sources */,
+				2C2F3B7B257EBFD300CF0E21 /* FakeFlickrURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,11 +353,6 @@
 			isa = PBXTargetDependency;
 			target = 2C5EE1B5257663880055DD57 /* Flodel */;
 			targetProxy = 2C5EE1CD2576638D0055DD57 /* PBXContainerItemProxy */;
-		};
-		2C5EE1D92576638D0055DD57 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2C5EE1B5257663880055DD57 /* Flodel */;
-			targetProxy = 2C5EE1D82576638D0055DD57 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -586,6 +535,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DK64384C46;
 				INFOPLIST_FILE = FlodelTests/Info.plist;
@@ -597,6 +547,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Brackets.FlodelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flodel.app/Flodel";
@@ -608,6 +559,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DK64384C46;
 				INFOPLIST_FILE = FlodelTests/Info.plist;
@@ -622,46 +574,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flodel.app/Flodel";
-			};
-			name = Release;
-		};
-		2C5EE1E72576638D0055DD57 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK64384C46;
-				INFOPLIST_FILE = FlodelUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Brackets.FlodelUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Flodel;
-			};
-			name = Debug;
-		};
-		2C5EE1E82576638D0055DD57 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DK64384C46;
-				INFOPLIST_FILE = FlodelUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = Brackets.FlodelUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Flodel;
 			};
 			name = Release;
 		};
@@ -691,15 +603,6 @@
 			buildConfigurations = (
 				2C5EE1E42576638D0055DD57 /* Debug */,
 				2C5EE1E52576638D0055DD57 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2C5EE1E62576638D0055DD57 /* Build configuration list for PBXNativeTarget "FlodelUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2C5EE1E72576638D0055DD57 /* Debug */,
-				2C5EE1E82576638D0055DD57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
