@@ -32,7 +32,7 @@ enum HTTPHeaderField: String {
 
 /// HTTP supported method type
 enum HTTPMethod: String {
-    case get =              "get"
+    case get =              "GET"
     case post =             "post"
     case delete =           "DELETE"
     case patch =            "PATCH"

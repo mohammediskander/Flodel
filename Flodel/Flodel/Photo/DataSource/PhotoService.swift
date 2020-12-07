@@ -79,13 +79,21 @@ class PhotoService: NSObject {
     var page: Int = 1
     var pages: Int?
     
-    private let session: URLSession = {
+    private var session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
     override init() {
         super.init()
+        
+        self.fetchPhotos()
+    }
+    
+    init(session configuration: URLSessionConfiguration) {
+        super.init()
+        
+        session = URLSession(configuration: configuration)
         
         self.fetchPhotos()
     }
@@ -162,6 +170,7 @@ class PhotoService: NSObject {
     func processPhotos(data: Data?, error: Error?) -> PhotoResult {
         do {
             let decoder = JSONDecoder()
+            
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
