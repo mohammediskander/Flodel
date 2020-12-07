@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import CoreLocation
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    let locationManager = CLLocationManager()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,6 +19,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        self.locationManager.requestAlwaysAuthorization()
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let newLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
+            return
+        }
+        
+        UserDefaults.standard.setValue(newLocation.latitude, forKey: "user.currentLocation.latitude")
+        UserDefaults.standard.setValue(newLocation.longitude, forKey: "user.currentLocation.longitude")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
